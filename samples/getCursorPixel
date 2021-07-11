@@ -1,0 +1,11 @@
+def getCursorPixel(hdc,x,y):
+    # 指定したPixelのRGB値の取得
+    pixel_color = win32gui.GetPixel(
+        hdc, x, y
+    )
+
+    # 10進数表記のRGB値に変換
+    rgb = [pixel_color >> 8*i & 0xff for i in range(3)]
+    #print("RGB({0},{1},{2})".format(*rgb))
+    #print(rgb)
+    return rgb

@@ -1,0 +1,9 @@
+def getPixelColor(x,y,pack=1):
+    #(179,486)#178,459
+    _input = cv2.imread(_DIR_INTERNAL_CAPTURE, cv2.COLOR_BGR2RGB)
+    
+    if(pack):
+        rgb = (_input[y,x])
+        return int('%02x%02x%02x' % (rgb[2], rgb[1], rgb[0]), 16)
+    else:
+        return (_input[y,x])
