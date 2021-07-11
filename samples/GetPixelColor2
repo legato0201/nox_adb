@@ -1,0 +1,28 @@
+#---------------------------------------------------------------
+# 関数名：GetPixelColor2
+# 処　理：直接画面のピクセル色を読み取る
+# 作成日：2021/6/27
+#---------------------------------------------------------------
+def GetPixelColor2(hwnd,pos):
+
+    rect = win32gui.GetWindowRect(hwnd)
+    w = abs(rect[2] - rect[0])
+    h = abs(rect[3] - rect[1])
+    #print(str(w)+" / " + str(h))
+    hwndDC = win32gui.GetWindowDC(hwnd)
+    mfcDC = win32ui.CreateDCFromHandle(hwndDC)
+    saveDC = mfcDC.CreateCompatibleDC()
+    saveBitMap = win32ui.CreateBitmap()
+    saveBitMap.CreateCompatibleBitmap(mfcDC, w, h)
+    saveDC.SelectObject(saveBitMap)
+
+
+    ret=win32gui.GetPixel(hwndDC,pos[0],pos[1])
+    r, g, b = ret & 0xff, (ret >> 8) & 0xff, (ret >> 16) & 0xff
+        
+    mfcDC.DeleteDC()
+    saveDC.DeleteDC()
+    win32gui.ReleaseDC(hwnd,hwndDC)
+    win32gui.DeleteObject(saveBitMap.GetHandle())
+
+    return [r, g, b]

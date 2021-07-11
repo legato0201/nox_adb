@@ -1,0 +1,10 @@
+#---------------------------------------------------------------
+# 関数名：sendMessage
+# 処　理：日本語を入力したい場合。clipper使用
+# 作成日：2021/6/27
+#---------------------------------------------------------------
+def sendMessage(mes):
+    _cmd = "nox_adb -s "+ _NOX_PORT +" shell am broadcast -a clipper.set -e text  '" + mes +"'"
+    _pipe = send_cmd_to_adb(_cmd)
+
+#https://github.com/majido/clipper

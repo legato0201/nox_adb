@@ -1,0 +1,5 @@
+def swipe(x1, y1,x2, y2,t=0):
+    _cmd = "nox_adb shell input swipe " + str(x1) + " " + str(y1)+  " " +str(x2) + " " + str(y2)
+    if(t):#time
+        _cmd = _cmd + " " + str(t)
+    send_cmd_to_adb(_cmd)
